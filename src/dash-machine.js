@@ -989,7 +989,7 @@ DashMachine.prototype.net = function (_this) {
 
     // xhr
     function get(url, cb) {
-        url = _this.options.apiURL + 'insight-grlc-api/' + url;
+        url = _this.options.apiURL + 'insight-tux-api/' + url;
         var xhr = new XMLHttpRequest();
         if ("withCredentials" in xhr) {
             xhr.open('GET', url, true); // Browsers
