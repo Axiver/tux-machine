@@ -916,10 +916,10 @@ DashMachine.prototype.net = function (_this) {
     function pingBestBlock() {
         // Wait for enough inactivity
         if (lastConnected ? (new Date() - lastConnected > 30000) : true) {
-            get("status?q=getBestBlockHash", function (res1) {
+            get("status?q=getInfo", function (res1) {
                 // first ping?
                 if (!_this.bestBlock)
-                    get("block/" + res1.bestblockhash, function (res) {
+                    get("block/" + res1.lastblockhash, function (res) {
                         if (res && !_this.bestBlock) {
                             getBlockTX(res);
                         }
@@ -932,12 +932,12 @@ DashMachine.prototype.net = function (_this) {
 
     function getBlockTX(block) {
         block.txAmount = [];
-        var maxTx = Math.min(block.tx.length, 30);
+        var maxTx = Math.min(block.txs.length, 30);
         var cbCount = 0;
         var outCount = 0;
         // request amounts for each TXO based on the address
         for (var i = 0; i < maxTx; i++) {
-            get("tx/" + block.tx[i], function (data) {
+            get("tx/" + block.txs[i].txid, function (data) {
                 cbCount++;
                 if (data && !_this.bestBlock) {
                     for (var i = 0; i < data.vout.length; i++) {
@@ -989,7 +989,7 @@ DashMachine.prototype.net = function (_this) {
 
     // xhr
     function get(url, cb) {
-        url = _this.options.apiURL + 'insight-tux-api/' + url;
+        url = _this.options.apiURL + "api/" + url;
         var xhr = new XMLHttpRequest();
         if ("withCredentials" in xhr) {
             xhr.open('GET', url, true); // Browsers
