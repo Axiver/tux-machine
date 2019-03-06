@@ -1,7 +1,6 @@
 ## Tuxcoin Machine
 
 Tuxcoin Blockchain Visualizer using Three.js, Cannon.js and [kal-explorer](https://github.com/ryan-shaw/kal-explorer) API.
-**Doesn't work with the Tuxcoin Blockchain yet, currently in development**
 
 ### Build
 
